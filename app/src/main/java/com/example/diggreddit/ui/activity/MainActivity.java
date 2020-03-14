@@ -1,8 +1,10 @@
-package com.example.diggreddit;
+package com.example.diggreddit.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.diggreddit.R;
 
 public class MainActivity extends AppCompatActivity {
 

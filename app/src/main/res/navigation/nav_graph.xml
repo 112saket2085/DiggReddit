@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nav_graph"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragment_topic_list">
+
+    <fragment
+        android:id="@+id/fragment_topic_list"
+        android:name="com.example.diggreddit.ui.fragment.TopicListFragment"
+        tools:layout="@layout/fragment_topic_list"/>
+
 
 </navigation>
