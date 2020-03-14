@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/fragment_topic_list"
         android:name="com.example.diggreddit.ui.fragment.TopicListFragment"
-        tools:layout="@layout/fragment_topic_list"/>
+        tools:layout="@layout/fragment_topic_list"
+        android:label="@string/str_home"/>
 
 
 </navigation>

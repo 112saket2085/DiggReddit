@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DiggReddit</string>
+
+    <!--TopicListFragment-->
+    <string name="str_home">Home</string>
+
 </resources>
