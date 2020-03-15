@@ -4,7 +4,13 @@ public class TopicModel {
 
     private String title;
     private String topicDescription;
-    private String vote;
+    private long vote;
+
+    public TopicModel(String title, String topicDescription, long vote) {
+        this.title = title;
+        this.topicDescription = topicDescription;
+        this.vote = vote;
+    }
 
     public String getTitle() {
         return title;
@@ -22,11 +28,11 @@ public class TopicModel {
         this.topicDescription = topicDescription;
     }
 
-    public String getVote() {
+    public long getVote() {
         return vote;
     }
 
-    public void setVote(String vote) {
+    public void setVote(long vote) {
         this.vote = vote;
     }
 }
