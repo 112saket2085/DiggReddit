@@ -1,4 +1,4 @@
-# App with upvote/downvote
+# App with Topic Upvote/downvote
 
 App that shows users topic with upvote/downvote.It also allow user to upvote/downvote topic.It also has functionality to add new topics.
 
