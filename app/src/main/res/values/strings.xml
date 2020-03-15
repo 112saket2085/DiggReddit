@@ -3,5 +3,7 @@
 
     <!--TopicListFragment-->
     <string name="str_home">Home</string>
+    <string name="str_enter_title">An interesting title</string>
+    <string name="str_enter_description">Your text post</string>
 
 </resources>

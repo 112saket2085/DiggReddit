@@ -37,7 +37,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
       final TopicModel topicModel=topicModelList.get(position);
       holder.textViewTitle.setText(topicModel.getTitle());
       holder.textViewTitleDescription.setText(topicModel.getTopicDescription());
-      holder.textViewVote.setText(topicModel.getVote());
+      holder.textViewVote.setText(String.valueOf(topicModel.getVote()));
       holder.imageViewUpVote.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {

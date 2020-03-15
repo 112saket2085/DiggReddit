@@ -34,13 +34,16 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
         initRecyclerView();
         TopicListViewModel.TopicListFactory topicListFactory=new TopicListViewModel.TopicListFactory(getParentActivity().getApplication());
         topicListViewModel= new ViewModelProvider(getParentActivity().getViewModelStore(),topicListFactory).get(TopicListViewModel.class);
+        addTopicListObserver();
     }
 
     private void addTopicListObserver() {
         topicListViewModel.getTopicListData().observe(getViewLifecycleOwner(), new Observer<List<TopicModel>>() {
             @Override
-            public void onChanged(List<TopicModel> topicModels) {
-
+            public void onChanged(List<TopicModel> topicModelList) {
+               TopicListFragment.this.topicModelList.clear();
+                TopicListFragment.this.topicModelList.addAll(topicModelList);
+                topicListAdapter.notifyDataSetChanged();
             }
         });
     }

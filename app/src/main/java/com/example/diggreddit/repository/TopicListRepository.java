@@ -37,7 +37,7 @@ public class TopicListRepository {
             TopicModel topicModel=topicModelList.get(i);
             for(int j=i+1;j<size;j++){
                 TopicModel topicModelToCompare=topicModelList.get(j);
-                if(topicModel.getVote()<topicModelToCompare.getVote()) {
+                if (topicModel.getVote() > topicModelToCompare.getVote()) {
                     count=count+1;
                 }
             }
