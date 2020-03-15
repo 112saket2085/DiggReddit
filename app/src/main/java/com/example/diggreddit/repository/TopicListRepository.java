@@ -3,6 +3,7 @@ package com.example.diggreddit.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.diggreddit.model.AddTopicResponseModel;
 import com.example.diggreddit.model.TopicModel;
 import com.example.diggreddit.store.InMemoryStore;
 import com.example.diggreddit.ui.fragment.TopicListFragment;
@@ -21,10 +22,21 @@ public class TopicListRepository {
         return instance;
     }
 
+    /**
+     * Add Topic Model to Topic List Memory
+     * @return AddTopicResponse LiveData containing status of Add Data.
+     */
+    public LiveData<AddTopicResponseModel> getResponse(TopicModel topicModel) {
+        MutableLiveData<AddTopicResponseModel> mutableLiveData=new MutableLiveData<>();
+        InMemoryStore.getInstance().putItemToList(topicModel);
+        mutableLiveData.setValue(new AddTopicResponseModel(true,"Topic Added Successfully"));
+        return mutableLiveData;
+    }
+
 
     /**
      * Create LiveData Instance
-     * @return Set value to LiveData Observer and change can be observed in Fragment Observer onChange Method
+     * @return TopicListLiveData -containing list of Topics.
      */
     public LiveData<List<TopicModel>> getTopicListResponseData() {
         MutableLiveData<List<TopicModel>> mutableLiveData=new MutableLiveData<>();
@@ -45,6 +57,7 @@ public class TopicListRepository {
                 topicModelNewList.add(topicModel);
             }
         }
+        // This add change to observer data in fragment and changed can be observed in onChanged method.
         mutableLiveData.setValue(topicModelNewList);
         return mutableLiveData;
     }
