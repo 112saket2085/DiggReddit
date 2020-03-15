@@ -53,8 +53,13 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
         recyclerViewTopic.setAdapter(topicListAdapter);
     }
 
-    @Override
-    public void onItemClick() {
 
+
+    @Override
+    public void onUpVoteClick(TopicModel topicModel) {
+    }
+
+    @Override
+    public void onDownVoteCLick(TopicModel topicModel) {
     }
 }
