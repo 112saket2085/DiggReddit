@@ -31,8 +31,6 @@ public abstract class BaseFragment extends Fragment {
         mainActivity=(MainActivity) getActivity();
     }
 
-
-
     protected MainActivity getParentActivity() {
         return mainActivity;
     }

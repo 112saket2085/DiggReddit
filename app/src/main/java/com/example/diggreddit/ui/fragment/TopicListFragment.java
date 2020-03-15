@@ -2,21 +2,26 @@ package com.example.diggreddit.ui.fragment;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.diggreddit.R;
+import com.example.diggreddit.model.TopicModel;
 import com.example.diggreddit.ui.adapter.TopicListAdapter;
+import com.example.diggreddit.viewmodel.TopicListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import java.util.ArrayList;
+import java.util.List;
 import butterknife.BindView;
 
-public class TopicListFragment extends BaseFragment {
+public class TopicListFragment extends BaseFragment implements TopicListAdapter.OnItemClickListener{
 
     @BindView(R.id.recycler_view_topic) RecyclerView recyclerViewTopic;
     @BindView(R.id.fab_add) FloatingActionButton floatingActionButton;
-
+    private List<TopicModel> topicModelList=new ArrayList<>();
     private TopicListAdapter topicListAdapter;
+    private TopicListViewModel topicListViewModel;
 
     @Override
     int getLayoutId() {
@@ -27,13 +32,29 @@ public class TopicListFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initRecyclerView();
+        TopicListViewModel.TopicListFactory topicListFactory=new TopicListViewModel.TopicListFactory(getParentActivity().getApplication());
+        topicListViewModel= new ViewModelProvider(getParentActivity().getViewModelStore(),topicListFactory).get(TopicListViewModel.class);
+    }
+
+    private void addTopicListObserver() {
+        topicListViewModel.getTopicListData().observe(getViewLifecycleOwner(), new Observer<List<TopicModel>>() {
+            @Override
+            public void onChanged(List<TopicModel> topicModels) {
+
+            }
+        });
     }
 
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerViewTopic.setLayoutManager(linearLayoutManager);
-        topicListAdapter = new TopicListAdapter();
+        topicListAdapter = new TopicListAdapter(topicModelList,this);
         recyclerViewTopic.setAdapter(topicListAdapter);
+    }
+
+    @Override
+    public void onItemClick() {
+
     }
 }

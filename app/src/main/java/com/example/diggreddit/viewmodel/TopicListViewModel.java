@@ -5,6 +5,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.diggreddit.model.TopicModel;
 import com.example.diggreddit.repository.TopicListRepository;
 
@@ -20,5 +23,19 @@ public class TopicListViewModel extends AndroidViewModel {
 
     public LiveData<List<TopicModel>> getTopicListData() {
         return TopicListRepository.getInstance().getTopicListResponseData();
+    }
+
+    public static class TopicListFactory implements ViewModelProvider.Factory {
+        private Application application;
+
+        public TopicListFactory(Application application) {
+            this.application=application;
+        }
+
+        @NonNull
+        @Override
+        public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+            return (T) new TopicListViewModel(application);
+        }
     }
 }

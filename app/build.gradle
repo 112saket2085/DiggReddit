@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 def nav_version = "2.2.1"
+def lifecycle_version = "2.2.0"
 
 android {
     compileSdkVersion 29
@@ -38,4 +39,5 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:10.2.1"
     //Google Material Design
     implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 }

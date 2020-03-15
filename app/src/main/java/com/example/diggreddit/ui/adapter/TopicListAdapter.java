@@ -5,8 +5,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.diggreddit.model.TopicModel;
+
+import java.util.List;
+
 public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.ViewHolder> {
 
+    private List<TopicModel> topicModelList;
+    private OnItemClickListener listener;
+
+    public TopicListAdapter(List<TopicModel> topicModelList,OnItemClickListener listener) {
+        this.topicModelList=topicModelList;
+        this.listener=listener;
+    }
 
     @NonNull
     @Override
@@ -29,5 +40,9 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick();
     }
 }
