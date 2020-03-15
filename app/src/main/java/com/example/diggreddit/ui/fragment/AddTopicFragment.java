@@ -52,10 +52,12 @@ public class AddTopicFragment extends BaseFragment {
     }
 
     private void addTopicListObserver(TopicModel topicModel) {
+        showProgressDialog(getString(R.string.adding_topic));
         addTopicViewModel.getResponse(topicModel).observe(getViewLifecycleOwner(), new Observer<AddTopicResponseModel>() {
             @Override
             public void onChanged(AddTopicResponseModel addTopicResponseModel) {
                 if(addTopicResponseModel!=null) {
+                    dismissProgressDialog();
                     handleResponse(addTopicResponseModel);
                     navigateTo(R.id.action_add_topic_to_topic_list);
                 }
@@ -65,7 +67,6 @@ public class AddTopicFragment extends BaseFragment {
     }
 
     private void handleResponse(AddTopicResponseModel addTopicResponseModel) {
-        showProgressDialog(getString(R.string.adding_topic));
         if (addTopicResponseModel != null) {
             if (addTopicResponseModel.isSuccess()) {
                 showShortToast(addTopicResponseModel.getMsg());

@@ -30,13 +30,7 @@ public class TopicListRepository {
      * @param topicModelToCompare TopicModel with vote.
      */
     public void changeVote(TopicModel topicModelToCompare) {
-        List<TopicModel> topicModelList=InMemoryStore.getInstance().getTopicList();
-        for(TopicModel topicModel:topicModelList) {
-            if(topicModelToCompare==topicModel) {
-                topicModel.setVote(topicModelToCompare.getVote());
-                InMemoryStore.getInstance().putItemToList(topicModel);
-            }
-        }
+        InMemoryStore.getInstance().putItemToList(topicModelToCompare);
     }
 
     /**
@@ -63,7 +57,10 @@ public class TopicListRepository {
      */
     public LiveData<List<TopicModel>> getTopicListResponseData() {
         MutableLiveData<List<TopicModel>> mutableLiveData=new MutableLiveData<>();
-        initDummyTopics();
+        List<TopicModel> topicModelList=InMemoryStore.getInstance().getTopicList();
+        if(topicModelList==null) {
+            initDummyTopics();
+        }
         // This add change to observer data in fragment and changed can be observed in onChanged method.
         mutableLiveData.setValue(InMemoryStore.getInstance().getTopicList());
         return mutableLiveData;

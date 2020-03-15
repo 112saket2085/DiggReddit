@@ -71,5 +71,11 @@ public abstract class BaseFragment extends Fragment {
         progressDialog.show();
     }
 
+    void dismissProgressDialog() {
+        if(progressDialog!=null) {
+            progressDialog.dismiss();
+        }
+    }
+
 
 }

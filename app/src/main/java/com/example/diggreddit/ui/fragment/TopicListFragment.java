@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.diggreddit.R;
 import com.example.diggreddit.model.TopicModel;
 import com.example.diggreddit.ui.adapter.TopicListAdapter;
@@ -18,10 +20,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class TopicListFragment extends BaseFragment implements TopicListAdapter.OnItemClickListener{
+public class TopicListFragment extends BaseFragment implements TopicListAdapter.OnItemClickListener,SwipeRefreshLayout.OnRefreshListener{
 
     @BindView(R.id.recycler_view_topic) RecyclerView recyclerViewTopic;
     @BindView(R.id.fab_add) FloatingActionButton floatingActionButton;
+    @BindView(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
     private List<TopicModel> topicModelList=new ArrayList<>();
     private TopicListAdapter topicListAdapter;
     private TopicListViewModel topicListViewModel;
@@ -43,13 +46,15 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
         TopicListViewModel.TopicListFactory topicListFactory=new TopicListViewModel.TopicListFactory(getParentActivity().getApplication());
         topicListViewModel= new ViewModelProvider(getParentActivity().getViewModelStore(),topicListFactory).get(TopicListViewModel.class);
         addTopicListObserver();
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     private void addTopicListObserver() {
         topicListViewModel.getTopicListData().observe(getViewLifecycleOwner(), new Observer<List<TopicModel>>() {
             @Override
             public void onChanged(List<TopicModel> topicModelList) {
-               TopicListFragment.this.topicModelList.clear();
+                swipeRefreshLayout.setRefreshing(false);
+                TopicListFragment.this.topicModelList.clear();
                 TopicListFragment.this.topicModelList.addAll(topicModelList);
                 topicListAdapter.notifyDataSetChanged();
             }
@@ -83,5 +88,10 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
         topicModel.setVote(topicModel.getVote()-1);
         topicListViewModel.changeVote(topicModel);
         topicListAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void onRefresh() {
+        addTopicListObserver();
     }
 }

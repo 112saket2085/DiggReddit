@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.diggreddit.R;
 import com.example.diggreddit.model.TopicModel;
 import java.util.List;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,9 +43,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
       if(topicModel.getVote()<=0) {
           holder.textViewVote.setText(context.getString(R.string.str_vote));
       }
-      else {
-          holder.textViewVote.setText(String.valueOf(topicModel.getVote()));
-      }
+      else holder.textViewVote.setText(String.valueOf(formatNumber(topicModel.getVote())));
       holder.imageViewUpVote.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -56,10 +56,23 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
           @Override
           public void onClick(View v) {
               if(listener!=null){
-                  listener.onDownVoteCLick(topicModel);
+                  if(!holder.textViewVote.getText().toString().equalsIgnoreCase(context.getString(R.string.str_vote))) {
+                      listener.onDownVoteCLick(topicModel);
+                  }
               }
           }
       });
+    }
+
+    /**
+     *
+     * @param count Vote Count
+     * @return Shows 1K in place for 1000 and
+     */
+    public static String formatNumber(long count) {
+        if (count < 1000) return "" + count;
+        int exp = (int) (Math.log(count) / Math.log(1000));
+        return String.format(Locale.getDefault(),"%.1f %c", count / Math.pow(1000, exp),"kMGTPE".charAt(exp-1));
     }
 
     @Override

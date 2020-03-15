@@ -32,7 +32,10 @@ public class InMemoryStore {
         else {
             topicModelList.add(topicModel);
         }
-        hashMap.put(TOPIC_LIST,topicModelList);
+        if(hashMap!=null) {
+            clearHashMap();
+            hashMap.put(TOPIC_LIST, topicModelList);
+        }
     }
 
     /**
@@ -46,6 +49,10 @@ public class InMemoryStore {
         return null;
     }
 
+    private void clearHashMap() {
+        hashMap.clear();
+    }
+
     /**
      * Method to add data according to vote descending
      * @param topicModelCompare Add Topic Model
@@ -53,15 +60,21 @@ public class InMemoryStore {
      */
     private List<TopicModel> addSortedList(TopicModel topicModelCompare) {
         List<TopicModel> topicModelList=getTopicList();
-        for(int i=0;i<getTopicList().size();i++) {
-            TopicModel topicModel=getTopicList().get(i);
+        for(int i=0;i<topicModelList.size();i++) {
+            TopicModel topicModel=topicModelList.get(i);
             if(topicModelCompare.getVote()>=topicModel.getVote()) {
-                topicModelList.add(i,topicModelCompare);
+                if(topicModelCompare.getTopicDescription().equalsIgnoreCase(topicModel.getTopicDescription())) {
+                    topicModelList.remove(topicModel);
+                    topicModelList.add(i,topicModelCompare);
+                }
+                else {
+                    topicModelList.add(i, topicModelCompare);
+                }
                 return topicModelList;
             }
         }
         topicModelList.add(topicModelCompare);
-        return getTopicList();
+        return topicModelList;
     }
 
 
