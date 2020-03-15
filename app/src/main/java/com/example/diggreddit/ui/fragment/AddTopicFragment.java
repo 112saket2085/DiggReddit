@@ -57,6 +57,7 @@ public class AddTopicFragment extends BaseFragment {
             public void onChanged(AddTopicResponseModel addTopicResponseModel) {
                 if(addTopicResponseModel!=null) {
                     handleResponse(addTopicResponseModel);
+                    navigateTo(R.id.action_add_topic_to_topic_list);
                 }
 
             }

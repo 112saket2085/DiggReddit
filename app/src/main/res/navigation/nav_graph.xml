@@ -13,6 +13,10 @@
 
         <action
             android:id="@+id/action_topic_list_to_add_topic"
+            app:enterAnim="@anim/anim_enter_from_right"
+            app:exitAnim="@anim/anim_exit_to_left"
+            app:popEnterAnim="@anim/anim_enter_from_left"
+            app:popExitAnim="@anim/anim_exit_to_right"
             app:destination="@id/fragment_topic_list"/>
 
     </fragment>
@@ -25,6 +29,12 @@
 
         <action
             android:id="@+id/action_add_topic_to_topic_list"
+            app:enterAnim="@anim/anim_enter_from_right"
+            app:exitAnim="@anim/anim_exit_to_left"
+            app:popEnterAnim="@anim/anim_enter_from_left"
+            app:popExitAnim="@anim/anim_exit_to_right"
+            app:popUpTo="@layout/fragment_add_topic"
+            app:popUpToInclusive="true"
             app:destination="@id/fragment_topic_list"/>
 
     </fragment>

@@ -1,6 +1,8 @@
 package com.example.diggreddit.ui.fragment;
 
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class TopicListFragment extends BaseFragment implements TopicListAdapter.OnItemClickListener{
 
@@ -59,6 +62,11 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
         recyclerViewTopic.setLayoutManager(linearLayoutManager);
         topicListAdapter = new TopicListAdapter(topicModelList,this);
         recyclerViewTopic.setAdapter(topicListAdapter);
+    }
+
+    @OnClick(R.id.fab_add)
+    public void onFabClick(View view) {
+        navigateTo(R.id.action_topic_list_to_add_topic);
     }
 
 

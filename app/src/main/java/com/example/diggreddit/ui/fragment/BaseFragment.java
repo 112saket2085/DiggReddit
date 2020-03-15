@@ -10,6 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
+import com.example.diggreddit.R;
 import com.example.diggreddit.ui.activity.MainActivity;
 
 import butterknife.ButterKnife;
@@ -20,6 +24,7 @@ public abstract class BaseFragment extends Fragment {
     abstract int getLayoutId();
     abstract String  getTitle();
     private ProgressDialog progressDialog;
+    private NavController navController;
 
     @Nullable
     @Override
@@ -36,11 +41,16 @@ public abstract class BaseFragment extends Fragment {
         if(mainActivity!=null) {
             mainActivity.setActionBarTitle(getTitle());
         }
+        navController= Navigation.findNavController(getParentActivity(),R.id.nav_host_fragment);
         initProgressDialog();
     }
 
     MainActivity getParentActivity() {
         return mainActivity;
+    }
+
+    void navigateTo(int resId) {
+        navController.navigate(resId);
     }
 
     void showShortToast(String msg) {
