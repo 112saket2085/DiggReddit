@@ -27,6 +27,10 @@ public class AddTopicFragment extends BaseFragment {
     private String title,topicDescription;
     private AddTopicViewModel addTopicViewModel;
 
+    @Override
+    public String getTitle() {
+        return getString(R.string.str_add_topic);
+    }
 
     @Override
     int getLayoutId() {
@@ -60,6 +64,7 @@ public class AddTopicFragment extends BaseFragment {
     }
 
     private void handleResponse(AddTopicResponseModel addTopicResponseModel) {
+        showProgressDialog(getString(R.string.adding_topic));
         if (addTopicResponseModel != null) {
             if (addTopicResponseModel.isSuccess()) {
                 showShortToast(addTopicResponseModel.getMsg());

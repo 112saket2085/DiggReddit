@@ -1,5 +1,7 @@
 package com.example.diggreddit.repository;
 
+import android.os.Handler;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class TopicListRepository {
 
+    private static final long DUMMY_ADD_TOPIC_TIME = 3000;
     private static TopicListRepository instance;
 
     public static TopicListRepository getInstance() {
@@ -27,16 +30,22 @@ public class TopicListRepository {
      * @return AddTopicResponse LiveData containing status of Add Data.
      */
     public LiveData<AddTopicResponseModel> getResponse(TopicModel topicModel) {
-        MutableLiveData<AddTopicResponseModel> mutableLiveData=new MutableLiveData<>();
+        final MutableLiveData<AddTopicResponseModel> mutableLiveData=new MutableLiveData<>();
         InMemoryStore.getInstance().putItemToList(topicModel);
-        mutableLiveData.setValue(new AddTopicResponseModel(true,"Topic Added Successfully"));
+        // Added Delay of 3 seconds to add topic and assuming response coming from server.
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mutableLiveData.setValue(new AddTopicResponseModel(true,"Topic Added Successfully"));
+            }
+        },DUMMY_ADD_TOPIC_TIME);
         return mutableLiveData;
     }
 
 
     /**
      * Create LiveData Instance
-     * @return TopicListLiveData -containing list of Topics.
+     * @return TopicListLiveData - containing list of Topics.
      */
     public LiveData<List<TopicModel>> getTopicListResponseData() {
         MutableLiveData<List<TopicModel>> mutableLiveData=new MutableLiveData<>();
@@ -63,7 +72,7 @@ public class TopicListRepository {
     }
 
     /*-*-
-      Added 5 Dummy Topics assuming response coming from server
+      Added 5 Dummy Topics assuming response coming from server.
      */
     private void initDummyTopics() {
         InMemoryStore inMemoryStore=InMemoryStore.getInstance();

@@ -3,11 +3,15 @@
 
     <!--TopicListFragment-->
     <string name="str_home">Home</string>
+
+    <!--AddTopicFragment-->
     <string name="str_enter_title">An interesting title</string>
     <string name="str_enter_description">Your text post</string>
     <string name="str_empty_title">Enter Title</string>
     <string name="str_empty_description">Enter Post</string>
     <string name="str_post">Post</string>
-    <string name="str_error_data">Error...Try Again</string>
+    <string name="str_error_data">Error…Try Again</string>
+    <string name="adding_topic">Adding Topic…Please wait</string>
+    <string name="str_add_topic">Add Topic</string>
 
 </resources>

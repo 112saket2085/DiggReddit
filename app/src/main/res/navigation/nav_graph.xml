@@ -9,7 +9,25 @@
         android:id="@+id/fragment_topic_list"
         android:name="com.example.diggreddit.ui.fragment.TopicListFragment"
         tools:layout="@layout/fragment_topic_list"
-        android:label="@string/str_home"/>
+        android:label="@string/str_home">
+
+        <action
+            android:id="@+id/action_topic_list_to_add_topic"
+            app:destination="@id/fragment_topic_list"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_add_topic"
+        android:name="com.example.diggreddit.ui.fragment.AddTopicFragment"
+        tools:layout="@layout/fragment_add_topic"
+        android:label="@string/str_add_topic">
+
+        <action
+            android:id="@+id/action_add_topic_to_topic_list"
+            app:destination="@id/fragment_topic_list"/>
+
+    </fragment>
 
 
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.diggreddit.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ public abstract class BaseFragment extends Fragment {
 
     private MainActivity mainActivity;
     abstract int getLayoutId();
+    abstract String  getTitle();
+    private ProgressDialog progressDialog;
 
     @Nullable
     @Override
@@ -30,6 +33,10 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mainActivity=(MainActivity) getActivity();
+        if(mainActivity!=null) {
+            mainActivity.setActionBarTitle(getTitle());
+        }
+        initProgressDialog();
     }
 
     MainActivity getParentActivity() {
@@ -40,8 +47,18 @@ public abstract class BaseFragment extends Fragment {
         Toast.makeText(getParentActivity(),msg,Toast.LENGTH_SHORT).show();
     }
 
-    void showLongToast(String msg) {
+     void showLongToast(String msg) {
         Toast.makeText(getParentActivity(),msg,Toast.LENGTH_LONG).show();
+    }
+
+    private void initProgressDialog() {
+      progressDialog=new ProgressDialog(getParentActivity());
+      progressDialog.setCancelable(false);
+    }
+
+    void showProgressDialog(String msg) {
+        progressDialog.setMessage(msg);
+        progressDialog.show();
     }
 
 

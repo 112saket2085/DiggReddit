@@ -29,6 +29,11 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
     }
 
     @Override
+    String getTitle() {
+        return getString(R.string.str_home);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initRecyclerView();
