@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.diggreddit.ui.activity.MainActivity;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseFragment extends Fragment {
 
     private MainActivity mainActivity;
@@ -18,7 +20,9 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(getLayoutId(),(ViewGroup) null);
+        View view=LayoutInflater.from(getActivity()).inflate(getLayoutId(),(ViewGroup) null);
+        ButterKnife.bind(this,view);
+        return view;
     }
 
     @Override
