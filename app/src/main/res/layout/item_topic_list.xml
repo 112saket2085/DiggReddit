@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_selector">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="10dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textSize="14sp"
             android:text="Cricket"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/text_view_title_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:textSize="18sp"
             android:layout_below="@+id/text_view_title"
             android:layout_marginTop="5dp"
-            android:textStyle="bold"
+            android:padding="5dp"
             android:text="Cricket is an very intersting game"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
         <RelativeLayout
@@ -42,40 +42,33 @@
                 android:id="@+id/image_view_upvote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_upvote"
                 android:padding="5dp"
-                />
+                android:src="@drawable/ic_upvote" />
 
             <TextView
                 android:id="@+id/text_view_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="100"
                 android:layout_alignTop="@+id/image_view_upvote"
                 android:layout_alignBottom="@+id/image_view_upvote"
-                android:gravity="center"
                 android:layout_toEndOf="@+id/image_view_upvote"
-                />
+                android:gravity="center"
+                android:text="100"
+                android:textSize="14sp" />
 
             <ImageView
                 android:id="@+id/image_view_downvote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/text_view_vote"
-                android:src="@drawable/ic_downvote"
                 android:padding="5dp"
-                />
-
+                android:src="@drawable/ic_downvote" />
 
 
         </RelativeLayout>
 
 
     </RelativeLayout>
-
-
-
 
 
 </RelativeLayout>
