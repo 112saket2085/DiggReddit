@@ -12,6 +12,7 @@ import com.example.diggreddit.R;
 import com.example.diggreddit.model.TopicModel;
 import java.util.List;
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.ViewHolder> {
 
@@ -76,7 +77,8 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
 
 
          ViewHolder(@NonNull View itemView) {
-            super(itemView);
+             super(itemView);
+             ButterKnife.bind(this,itemView);
         }
     }
 

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import com.example.diggreddit.R;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         navController= Navigation.findNavController(this,R.id.nav_host_fragment);
         initActionBar();
     }
