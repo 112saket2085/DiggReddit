@@ -43,7 +43,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
       if(topicModel.getVote()<=0) {
           holder.textViewVote.setText(context.getString(R.string.str_vote));
       }
-      else holder.textViewVote.setText(String.valueOf(formatNumber(topicModel.getVote())));
+      else holder.textViewVote.setText(formatNumber(topicModel.getVote()));
       holder.imageViewUpVote.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
@@ -57,7 +57,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
           public void onClick(View v) {
               if(listener!=null){
                   if(!holder.textViewVote.getText().toString().equalsIgnoreCase(context.getString(R.string.str_vote))) {
-                      listener.onDownVoteCLick(topicModel);
+                    listener.onDownVoteCLick(topicModel);
                   }
               }
           }

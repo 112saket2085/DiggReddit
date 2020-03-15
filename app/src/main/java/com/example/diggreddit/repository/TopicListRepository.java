@@ -73,7 +73,7 @@ public class TopicListRepository {
         InMemoryStore inMemoryStore=InMemoryStore.getInstance();
         inMemoryStore.putItemToList(new TopicModel("Politics","Politics are popular during every election year.",100));
         inMemoryStore.putItemToList(new TopicModel("Recipes","Recipes are a great way to draw traffic to your blog.",200));
-        inMemoryStore.putItemToList(new TopicModel("Beginner guides","Before you can convince someone that you know the advanced stuff, start with 101 beginner guides.",215));
+        inMemoryStore.putItemToList(new TopicModel("Beginner guides","Before you can convince someone that you know the advanced stuff, start with 101 beginner guides.",2158));
         inMemoryStore.putItemToList(new TopicModel("Personal stories","Learning how to tell a story is an art. Once you master this skill, the quality of your blog posts will improve.",150));
         inMemoryStore.putItemToList(new TopicModel("Product reviews","If you want to monetize your blog instantly, this is a smart move.",700));
     }
