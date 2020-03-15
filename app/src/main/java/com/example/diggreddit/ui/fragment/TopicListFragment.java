@@ -69,13 +69,19 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
         navigateTo(R.id.action_topic_list_to_add_topic);
     }
 
-
-
     @Override
     public void onUpVoteClick(TopicModel topicModel) {
+        int position=topicModelList.indexOf(topicModel);
+        topicModel.setVote(topicModel.getVote()+1);
+        topicListAdapter.notifyItemChanged(position);
+        topicListViewModel.changeVote(topicModel);
     }
 
     @Override
     public void onDownVoteCLick(TopicModel topicModel) {
+        int position=topicModelList.indexOf(topicModel);
+        topicModel.setVote(topicModel.getVote()-1);
+        topicListAdapter.notifyItemChanged(position);
+        topicListViewModel.changeVote(topicModel);
     }
 }

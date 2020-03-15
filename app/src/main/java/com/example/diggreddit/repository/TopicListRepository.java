@@ -26,6 +26,20 @@ public class TopicListRepository {
     }
 
     /**
+     * Change Vote details
+     * @param topicModelToCompare TopicModel with vote.
+     */
+    public void changeVote(TopicModel topicModelToCompare) {
+        List<TopicModel> topicModelList=InMemoryStore.getInstance().getTopicList();
+        for(TopicModel topicModel:topicModelList) {
+            if(topicModelToCompare==topicModel) {
+                topicModel.setVote(topicModelToCompare.getVote());
+                InMemoryStore.getInstance().putItemToList(topicModel);
+            }
+        }
+    }
+
+    /**
      * Add Topic Model to Topic List Memory
      * @return AddTopicResponse LiveData containing status of Add Data.
      */

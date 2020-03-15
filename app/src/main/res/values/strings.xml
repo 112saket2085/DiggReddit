@@ -13,5 +13,6 @@
     <string name="str_error_data">Error…Try Again</string>
     <string name="adding_topic">Adding Topic…Please wait</string>
     <string name="str_add_topic">Add Topic</string>
+    <string name="str_vote">Vote</string>
 
 </resources>
