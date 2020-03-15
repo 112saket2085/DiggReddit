@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.diggreddit.R;
 import com.example.diggreddit.model.TopicModel;
+import com.example.diggreddit.store.InMemoryStore;
 import com.example.diggreddit.ui.adapter.TopicListAdapter;
 import com.example.diggreddit.viewmodel.TopicListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -56,9 +57,21 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
                 swipeRefreshLayout.setRefreshing(false);
                 TopicListFragment.this.topicModelList.clear();
                 TopicListFragment.this.topicModelList.addAll(topicModelList);
+                getBundleValues();
                 topicListAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private void getBundleValues() {
+        Bundle bundle=getArguments();
+        if(bundle!=null) {
+            boolean refresh = bundle.getBoolean(AddTopicFragment.BUNDLE_SCROLL_TO_BOTTOM);
+            if(refresh) {
+                recyclerViewTopic.scrollToPosition(topicModelList.size()-1);
+                bundle.putBoolean(AddTopicFragment.BUNDLE_SCROLL_TO_BOTTOM,false);
+            }
+        }
     }
 
     private void initRecyclerView() {
@@ -78,7 +91,6 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
     public void onUpVoteClick(TopicModel topicModel) {
         int position=topicModelList.indexOf(topicModel);
         topicModel.setVote(topicModel.getVote()+1);
-        topicListViewModel.changeVote(topicModel);
         topicListAdapter.notifyItemChanged(position);
     }
 
@@ -86,7 +98,6 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
     public void onDownVoteCLick(TopicModel topicModel) {
         int position=topicModelList.indexOf(topicModel);
         topicModel.setVote(topicModel.getVote()-1);
-        topicListViewModel.changeVote(topicModel);
         topicListAdapter.notifyItemChanged(position);
     }
 

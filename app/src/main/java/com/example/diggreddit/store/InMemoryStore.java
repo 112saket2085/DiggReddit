@@ -4,6 +4,8 @@ import com.example.diggreddit.model.TopicModel;
 import com.example.diggreddit.viewmodel.TopicListViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,11 +28,9 @@ public class InMemoryStore {
      */
     public void putItemToList(TopicModel topicModel) {
         List<TopicModel> topicModelList=new ArrayList<>();
+        topicModelList.add(topicModel);
         if(getTopicList()!=null && !getTopicList().isEmpty()) {
-          topicModelList.addAll(addSortedList(topicModel));
-        }
-        else {
-            topicModelList.add(topicModel);
+          topicModelList.addAll(getTopicList());
         }
         if(hashMap!=null) {
             clearHashMap();
@@ -44,7 +44,16 @@ public class InMemoryStore {
      */
     public List<TopicModel> getTopicList() {
         if(hashMap.containsKey(TOPIC_LIST)) {
-            return hashMap.get(TOPIC_LIST);
+            List<TopicModel> topicModelList = hashMap.get(TOPIC_LIST);
+            if (topicModelList != null) {
+                Collections.sort(topicModelList, new Comparator<TopicModel>() {
+                    @Override
+                    public int compare(TopicModel lhs, TopicModel rhs) {
+                        return Long.compare(rhs.getVote(), lhs.getVote());
+                    }
+                });
+                return hashMap.get(TOPIC_LIST);
+            }
         }
         return null;
     }
@@ -52,30 +61,4 @@ public class InMemoryStore {
     private void clearHashMap() {
         hashMap.clear();
     }
-
-    /**
-     * Method to add data according to vote descending
-     * @param topicModelCompare Add Topic Model
-     * @return List of sorted Topic Model list
-     */
-    private List<TopicModel> addSortedList(TopicModel topicModelCompare) {
-        List<TopicModel> topicModelList=getTopicList();
-        for(int i=0;i<topicModelList.size();i++) {
-            TopicModel topicModel=topicModelList.get(i);
-            if(topicModelCompare.getVote()>=topicModel.getVote()) {
-                if(topicModelCompare.getTopicDescription().equalsIgnoreCase(topicModel.getTopicDescription())) {
-                    topicModelList.remove(topicModel);
-                    topicModelList.add(i,topicModelCompare);
-                }
-                else {
-                    topicModelList.add(i, topicModelCompare);
-                }
-                return topicModelList;
-            }
-        }
-        topicModelList.add(topicModelCompare);
-        return topicModelList;
-    }
-
-
 }

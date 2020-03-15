@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.diggreddit.R;
 import com.example.diggreddit.model.AddTopicResponseModel;
 import com.example.diggreddit.model.TopicModel;
+import com.example.diggreddit.utility.Util;
 import com.example.diggreddit.viewmodel.AddTopicViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,6 +27,7 @@ public class AddTopicFragment extends BaseFragment {
     @BindView(R.id.button_post) Button buttonPost;
     private String title,topicDescription;
     private AddTopicViewModel addTopicViewModel;
+    static final String BUNDLE_SCROLL_TO_BOTTOM="bundle_scroll";
 
     @Override
     public String getTitle() {
@@ -46,6 +48,7 @@ public class AddTopicFragment extends BaseFragment {
 
     @OnClick(R.id.button_post)
     public void onPostButtonCLick(View view) {
+        Util.hideKeyboard(getParentActivity(),view);
         if(isFieldValidated()) {
             addTopicListObserver(new TopicModel(title,topicDescription,0));
         }
@@ -59,7 +62,9 @@ public class AddTopicFragment extends BaseFragment {
                 if(addTopicResponseModel!=null) {
                     dismissProgressDialog();
                     handleResponse(addTopicResponseModel);
-                    navigateTo(R.id.action_add_topic_to_topic_list);
+                    Bundle bundle=new Bundle();
+                    bundle.putBoolean(BUNDLE_SCROLL_TO_BOTTOM,true);
+                    navigateTo(R.id.action_add_topic_to_topic_list,bundle);
                 }
 
             }

@@ -53,6 +53,10 @@ public abstract class BaseFragment extends Fragment {
         navController.navigate(resId);
     }
 
+    void navigateTo(int resId,Bundle bundle) {
+        navController.navigate(resId,bundle);
+    }
+
     void showShortToast(String msg) {
         Toast.makeText(getParentActivity(),msg,Toast.LENGTH_SHORT).show();
     }

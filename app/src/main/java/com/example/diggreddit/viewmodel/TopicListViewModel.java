@@ -25,10 +25,6 @@ public class TopicListViewModel extends AndroidViewModel {
         return TopicListRepository.getInstance().getTopicListResponseData();
     }
 
-    public void changeVote(TopicModel topicModel) {
-        TopicListRepository.getInstance().changeVote(topicModel);
-    }
-
     public static class TopicListFactory implements ViewModelProvider.Factory {
         private Application application;
 
