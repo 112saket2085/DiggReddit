@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/str_enter_description"
             android:textColor="@color/black"
+            android:maxLength="255"
             android:textColorHint="@color/black"
             android:textSize="18sp"/>
 
