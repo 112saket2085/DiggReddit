@@ -75,7 +75,7 @@ public class TopicListFragment extends BaseFragment implements TopicListAdapter.
     }
 
     private void initRecyclerView() {
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getParentActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerViewTopic.setLayoutManager(linearLayoutManager);
         topicListAdapter = new TopicListAdapter(topicModelList,this);
